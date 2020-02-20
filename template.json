@@ -5,7 +5,7 @@
         "subscriptionId": {
             "type": "string"
         },
-        "name": {
+        "webSiteName": {
             "type": "string"
         },
         "location": {
@@ -45,55 +45,16 @@
     "resources": [
         {
             "apiVersion": "2018-11-01",
-            "name": "[parameters('name')]",
+            "name": "[parameters('webSiteName')]",
             "type": "Microsoft.Web/sites",
             "location": "[parameters('location')]",
             "tags": null,
             "dependsOn": [
-                "[concat('microsoft.insights/components/', parameters('name'))]",
                 "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
             ],
             "properties": {
-                "name": "[parameters('name')]",
+                "name": "[parameters('webSiteName')]",
                 "siteConfig": {
-                    "appSettings": [
-                        {
-                            "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-                            "value": "[reference([concat('microsoft.insights/components/', parameters('name'))]", '2015-05-01').InstrumentationKey]"
-                        },
-                        {
-                            "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
-                            "value": "~2"
-                        },
-                        {
-                            "name": "XDT_MicrosoftApplicationInsights_Mode",
-                            "value": "default"
-                        },
-                        {
-                            "name": "DiagnosticServices_EXTENSION_VERSION",
-                            "value": "disabled"
-                        },
-                        {
-                            "name": "APPINSIGHTS_PROFILERFEATURE_VERSION",
-                            "value": "disabled"
-                        },
-                        {
-                            "name": "APPINSIGHTS_SNAPSHOTFEATURE_VERSION",
-                            "value": "disabled"
-                        },
-                        {
-                            "name": "InstrumentationEngine_EXTENSION_VERSION",
-                            "value": "disabled"
-                        },
-                        {
-                            "name": "SnapshotDebugger_EXTENSION_VERSION",
-                            "value": "disabled"
-                        },
-                        {
-                            "name": "XDT_MicrosoftApplicationInsights_BaseExtensions",
-                            "value": "disabled"
-                        }
-                    ],
                     "metadata": [
                         {
                             "name": "CURRENT_STACK",
