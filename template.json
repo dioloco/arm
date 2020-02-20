@@ -50,7 +50,7 @@
             "location": "[parameters('location')]",
             "tags": null,
             "dependsOn": [
-                "microsoft.insights/components/myweb04",
+                "[concat('microsoft.insights/components/', parameters('name'))]",
                 "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
             ],
             "properties": {
@@ -59,7 +59,7 @@
                     "appSettings": [
                         {
                             "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-                            "value": "[reference('microsoft.insights/components/myweb04', '2015-05-01').InstrumentationKey]"
+                            "value": "[reference([concat('microsoft.insights/components/', parameters('name'))]", '2015-05-01').InstrumentationKey]"
                         },
                         {
                             "name": "ApplicationInsightsAgent_EXTENSION_VERSION",
