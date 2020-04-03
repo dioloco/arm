@@ -18,3 +18,15 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
   
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'Dio(6137c161-8516-41c7-ae2f-9b51d2bae775)'
+    subscriptionId: '6137c161-8516-41c7-ae2f-9b51d2bae775'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'mynewweb-rg'
+    location: 'Central US'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://raw.githubusercontent.com/dioloco/arm/master/template.json?'
+    csmParametersFileLink: 'https://raw.githubusercontent.com/dioloco/arm/master/parameters.json'
+    deploymentMode: 'Incremental'
